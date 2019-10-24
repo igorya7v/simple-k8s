@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-node-port
+spec:
+  # Ussually not used in production.
+  # Since the nodePort is 30000 - 32767
+  # Useful for dev.
+  type: NodePort
+  ports:
+    # Port is used by other Pods
+    # to access the container in the Pod
+    - port: 3050
+      # Is the port of the container in the Pod
+      targetPort: 3000
+      # Exposed to the outside world
+      # If not specified, a default will be assigned
+      # (random 30000 - 32767)
+      nodePort: 31515
+  selector:
+    component: web

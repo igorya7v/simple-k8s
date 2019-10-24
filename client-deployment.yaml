@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: client-deployment
+
+spec:
+  # number of pods to create
+  replicas: 1
+  
+  # Establish a handle 
+  # to a created Pod.
+  selector:
+    matchLabels:
+      # look for labels
+      # in the Pod template below.
+      component: web
+      
+  # pod template
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: igorya5v/react-client
+          ports:
+            - containerPort: 3000
